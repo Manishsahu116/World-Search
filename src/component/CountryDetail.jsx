@@ -26,25 +26,25 @@ const CountryDetail = ({ theme }) => {
   if (!country) return <div className="text-center py-4">Country not found</div>;
 
   return (
-    <div className="min-h-screen dark:bg-gray-900  dark:text-white transition-colors duration-300">
+    <div className="min-h-screen dark:bg-gray-900 dark:text-white transition-colors duration-300">
       <div className="p-6">
         <BackButton theme={theme} />  
 
         <div className="flex flex-col md:flex-row md:items-center mt-6">
           <img
-            src={country.flags.png}
+            src={country.flags?.png || ''}
             alt={`${country.name} flag`}
             className="w-full md:w-1/3 object-cover rounded-lg mb-4 md:mb-0 shadow-lg"
           />
           <div className="md:ml-6">
-            <h1 className="text-4xl font-extrabold mb-4">{country.name}</h1>
-            <p className="text-lg mb-2"><strong>Capital:</strong> {country.capital}</p>
-            <p className="text-lg mb-2"><strong>Region:</strong> {country.region}</p>
-            <p className="text-lg mb-2"><strong>Subregion:</strong> {country.subregion}</p>
-            <p className="text-lg mb-2"><strong>Population:</strong> {country.population.toLocaleString()}</p>
-            <p className="text-lg mb-2"><strong>Area:</strong> {country.area.toLocaleString()} km²</p>
-            <p className="text-lg mb-2"><strong>Languages:</strong> {country.languages.map(lang => lang.name).join(', ')}</p>
-            <p className="text-lg mb-2"><strong>Currencies:</strong> {country.currencies.map(curr => curr.name).join(', ')}</p>
+            <h1 className="text-4xl font-extrabold mb-4">{country.name || 'No Name Available'}</h1>
+            {country.capital && <p className="text-lg mb-2"><strong>Capital:</strong> {country.capital}</p>}
+            {country.region && <p className="text-lg mb-2"><strong>Region:</strong> {country.region}</p>}
+            {country.subregion && <p className="text-lg mb-2"><strong>Subregion:</strong> {country.subregion}</p>}
+            {country.population !== undefined && <p className="text-lg mb-2"><strong>Population:</strong> {country.population.toLocaleString()}</p>}
+            {country.area && <p className="text-lg mb-2"><strong>Area:</strong> {country.area.toLocaleString()} km²</p>}
+            {country.languages && <p className="text-lg mb-2"><strong>Languages:</strong> {country.languages.map(lang => lang.name).join(', ')}</p>}
+            {country.currencies && <p className="text-lg mb-2"><strong>Currencies:</strong> {country.currencies.map(curr => curr.name).join(', ')}</p>}
 
             {country.borders && country.borders.length > 0 && (
               <div className="mt-4">
